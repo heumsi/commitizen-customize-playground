@@ -1,0 +1,24 @@
+commitizen:
+  customize:
+    example: '[bug fix] (README.md) Fix Typo'
+    message_template: '[{{ type }}]{% if changed_scope %} ({{ changed_scope }}){% endif %} {{ message }}'
+    questions:
+    - choices:
+      - name: new feature
+        value: feature
+      - name: bug fix
+        value: bug fix
+      - name: config
+        value: config
+      - name: breaking changes
+        value: break
+      message: "Select type:"
+      name: type
+      type: list
+    - message: "Changed files or directory scope:"
+      name: changed_scope
+      type: path
+    - message: "Input message:"
+      name: message
+      type: input
+  name: cz_customize
