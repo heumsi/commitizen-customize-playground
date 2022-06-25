@@ -44,6 +44,6 @@ commitizen:
     schema_pattern: \[(?P<change_type>feature|bug fix|config|break|bump)\](\s\((?P<scope>.*)\))?\s(?P<message>.*)?
   name: cz_customize
   tag_format: v$major.$minor.$patch$prerelease
-  version: 0.0.3
+  version: 0.0.4
   version_files:
   - project.yaml:version
