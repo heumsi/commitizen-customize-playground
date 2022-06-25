@@ -16,11 +16,31 @@ jobs:
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
           fetch-depth: 0
-      - name: Create bump and changelog
-        uses: commitizen-tools/commitizen-action@master
+      - name: Set git user
+        uses: fregante/setup-git-user@v1
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          changelog_increment_filename: body.md
+          python-version: 3.9
+      - name: Bumpc
+        run: |
+          # Install commitizen.
+          python -m pip install --upgrade pip
+          pip install commitizen
+
+          # Bump version.
+          cz bump
+          
+          # Push bump commit and tag.
+          git push origin main
+          git push origin "HEAD:main" --tags
+
+          # Save current version into environment var.
+          echo "REVISION=$(cz version --project)" >> $GITHUB_ENV
+      - name: Create Changelog
+        run: |
+          # Create Changelog for release.
+          cz changelog --dry-run ${{ env.REVISION }} > "body.md"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
