@@ -1,14 +1,15 @@
 commitizen:
   bump_message: '[bump] from $current_version to $new_version'
   customize:
-    example: '[bug fix] (README.md) Fix Typo'
-    message_template: '[{{ type }}]{% if changed_scope %} ({{ changed_scope }}){% endif %} {{ message }}'
     bump_map:
       break: MAJOR
       bug fix: PATCH
       config: PATCH
       feature: MINOR
     bump_pattern: feature|bug fix|config|break
+    example: '[bug fix] (README.md) Fix Typo'
+    message_template: '[{{ type }}]{% if changed_scope %} ({{ changed_scope }}){%
+      endif %} {{ message }}'
     questions:
     - choices:
       - name: new feature
@@ -30,6 +31,6 @@ commitizen:
       type: input
   name: cz_customize
   tag_format: v$major.$minor.$patch$prerelease
-  version: 0.0.0
+  version: 0.0.1
   version_files:
   - project.yaml:version
