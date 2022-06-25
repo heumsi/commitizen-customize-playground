@@ -29,8 +29,20 @@ commitizen:
     - message: "Input message:"
       name: message
       type: input
+    change_type_map: 
+      feature: Feature
+      bug fix: Fix
+      config: Config
+      break: Break
+    change_type_order:
+      - Break
+      - Feature
+      - Fix
+      - Config
+    commit_parser: "\\[(?P<change_type>feature|bug fix|config|break)\\](\\s\\((?P<scope>.*)\\))?\\s(?P<message>.*)?" 
   name: cz_customize
   tag_format: v$major.$minor.$patch$prerelease
   version: 0.0.1
   version_files:
   - project.yaml:version
+  changelog_file: "CHANGELOG.md"
